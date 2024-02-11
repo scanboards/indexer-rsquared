@@ -34,7 +34,6 @@ ADD . /rsquared-core
 WORKDIR /rsquared-core
 
 # Compile
-# Previously -DCMAKE_BUILD_TYPE=Release \
 RUN \
     ( git submodule sync --recursive || \
       find `pwd`  -type f -name .git | \
@@ -45,7 +44,7 @@ RUN \
       git submodule sync --recursive ) && \
     git submodule update --init --recursive && \
     cmake \
-        -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+        -DCMAKE_BUILD_TYPE=Release \
         -DGRAPHENE_DISABLE_UNITY_BUILD=ON \
         . && \
     make witness_node cli_wallet get_dev_key && \
@@ -53,16 +52,14 @@ RUN \
     #
     # Obtain version
     mkdir /etc/rsquared && \
-    git rev-parse --short HEAD > /etc/rsquared/version
-    # git rev-parse --short HEAD > /etc/rsquared/version && \
-    # cd / && \
-    # rm -rf /rsquared-core
+    git rev-parse --short HEAD > /etc/rsquared/version && \
+    cd / && \
+    rm -rf /rsquared-core
 
-# FROM phusion/baseimage:18.04-1.0.0 AS run
+FROM phusion/baseimage:18.04-1.0.0 AS run
 
-# COPY --from=build /usr/local/bin /usr/local/bin
-# COPY --from=build /etc/rsquared/version /etc/rsquared/version
-
+COPY --from=build /usr/local/bin /usr/local/bin
+COPY --from=build /etc/rsquared/version /etc/rsquared/version
 
 # Home directory $HOME
 WORKDIR /

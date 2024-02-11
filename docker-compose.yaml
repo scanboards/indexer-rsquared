@@ -1,0 +1,30 @@
+version: '3.3'
+
+# services:
+#   indexer_rsquared:
+#     image: indexer_rsquared
+#     build:
+#       dockerfile: ./Dockerfile
+#       context: .
+#     platform: linux/amd64
+#     ports:
+#       - "8090:8090"
+#     networks:
+#       - docker-elk_elk
+#     command: >
+#       tail -f /dev/null
+
+services:
+  indexer_rsquared:
+    image: docker.io/lunacrafts/indexer-rsquared:latest
+    platform: linux/amd64
+    ports:
+      - "8090:8090"
+    networks:
+      - docker-elk_elk
+    command: >
+      /bin/bash -c "/usr/local/bin/witness_node --rpc-endpoint=127.0.0.1:8090 --plugins=\"witness api_helper_indexes market_history elasticsearch es_objects\" --elasticsearch-node-url=http://elasticsearch:9200/ --elasticsearch-index-prefix=\"search-rsquared-\" --elasticsearch-visitor=false --elasticsearch-basic-auth=\"elastic:changeme\" --es-objects-elasticsearch-url=http://elasticsearch:9200/ --es-objects-auth=\"elastic:changeme\""
+
+networks:
+  docker-elk_elk:
+    external: true

@@ -1,0 +1,17 @@
+curl -u "elastic:changeme" -k "http://localhost:9200"
+
+curl -u "elastic:changeme" -k "http://elasticsearch:9200"
+
+docker-compose up > logs.txt 2>&1
+
+curl -u "elastic:changeme" -X PUT "http://elasticsearch:9200/_ingest/pipeline/remove_type" -H 'Content-Type: application/json' -d'
+{
+  "description": "Removes or renames the _type field from documents",
+  "processors": [
+    {
+      "remove": {
+        "field": "_type"
+      }
+    }
+  ]
+}'
