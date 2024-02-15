@@ -27,13 +27,9 @@ YEARS=7
 
 # Generate indices for each year and month
 for (( YEAR=START_YEAR; YEAR<START_YEAR+YEARS; YEAR++ )); do
-    for MONTH in {01..12}; do
-
-        if (( MONTH >= 1 && MONTH <= 9 )); then
-            FORMATTED_MONTH="0${MONTH}"
-        else
-            FORMATTED_MONTH="${MONTH}"
-        fi
+    for (( MONTH=1; MONTH<=12; MONTH++ )); do
+        # Use printf to ensure the month is zero-padded
+        FORMATTED_MONTH=$(printf "%02d" $MONTH)
 
         INDEX_NAME="search-rsquared-${YEAR}-${FORMATTED_MONTH}"
 
