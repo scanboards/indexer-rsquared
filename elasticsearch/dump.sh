@@ -17,7 +17,7 @@ fi
 
 # Array of index names to process
 # declare -a INDEXES=("rsquared-2023-12" "rsquared-2024-01" "rsquared-2024-02")
-declare -a INDEXES=("rsquared-2023-12")
+declare -a INDEXES=("search-rsquared-2023-12")
 
 # Loop through each index
 for INDEX in "${INDEXES[@]}"; do
