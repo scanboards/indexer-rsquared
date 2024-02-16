@@ -302,8 +302,8 @@ void elasticsearch_plugin_impl::doVisitor(const optional <operation_history_obje
 
    auto fill_price = (o_v.fill_receives_amount.value/(double)asset::scaled_precision(fill_receives_asset.precision).value) /
            (o_v.fill_pays_amount.value/(double)asset::scaled_precision(fill_pays_asset.precision).value);
-   vs.fill_data.fill_price_units = fill_price;
-   // vs.fill_data.fill_price = o_v.fill_fill_price;
+   // vs.fill_data.fill_price_units = fill_price;
+   vs.fill_data.fill_price = o_v.fill_fill_price;
    vs.fill_data.is_maker = o_v.fill_is_maker;
 }
 
