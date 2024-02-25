@@ -17,14 +17,19 @@ HOST="localhost:9200"
 # echo "Password: $PASSWORD"
 # echo "Host: $HOST"
 
-# Path to the mappings file
-MAPPINGS_FILE="mappings.json"
+# Get the directory where the script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+
+# Path to the mappings file relative to the script's location
+MAPPINGS_FILE="$SCRIPT_DIR/mappings.json"
 
 # Check if the mappings file exists
 if [ ! -f "$MAPPINGS_FILE" ]; then
     echo "Mappings file $MAPPINGS_FILE does not exist."
     exit 1
 fi
+
+echo $MAPPINGS_FILE
 
 # Load the mapping JSON from the mappings file
 MAPPING_JSON=$(cat "$MAPPINGS_FILE")
