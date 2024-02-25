@@ -1,11 +1,21 @@
 #!/bin/bash
 
-# Elasticsearch credentials
+#!/bin/bash
+
+# Default values
 USERNAME="elastic"
 PASSWORD="changeme"
-
-# Elasticsearch host
 HOST="localhost:9200"
+
+# Override with env variables if they exist
+[ -n "$ES_USERNAME" ] && USERNAME=$ES_USERNAME
+[ -n "$ES_PASSWORD" ] && PASSWORD=$ES_PASSWORD
+[ -n "$ES_HOST" ] && HOST=$ES_HOST
+
+# echo "Using Elasticsearch credentials:"
+# echo "Username: $USERNAME"
+# echo "Password: $PASSWORD"
+# echo "Host: $HOST"
 
 # Path to the mappings file
 MAPPINGS_FILE="mappings.json"
