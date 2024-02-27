@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 # Default values
 USERNAME="elastic"
 PASSWORD="changeme"
